@@ -1,10 +1,20 @@
 from rest_framework import serializers
-from .models import MobilePspCustomerInfo, MobilePsPCustomerTransactionCategorization, MobilePsPFailedTransactions, MobilePsPInteroperability
+from .models import BasePspCustomerInfo, MobilePspCustomerInfo, MobilePsPCustomerTransactionCategorization, MobilePsPFailedTransactions, MobilePsPInteroperability
+
+
+class Serialbase(serializers.ModelSerializer):
+    class Meta:
+        model= MobilePspCustomerInfo
+        fields = "__all__"
+
 
 class MobilePspCustomerInfoSerializer(serializers.ModelSerializer):
+
+    PspCustomerInfo = Serialbase(many=True, read_only=True)
     class Meta:
-        model = MobilePspCustomerInfo
-        fields = "__all__"
+        model = BasePspCustomerInfo
+        fields = ["institution_code", "request_id", "is_attached", "reporting_date", "PspCustomerInfo"]
+
 
 
 class MobilePspCustomerTransactionCatserilizer(serializers.ModelSerializer):

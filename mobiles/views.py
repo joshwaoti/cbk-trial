@@ -7,6 +7,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 
 from .models import (
+    BasePspCustomerInfo,
     MobilePspCustomerInfo,
     MobilePsPCustomerTransactionCategorization,
     MobilePsPFailedTransactions,
@@ -20,7 +21,7 @@ from .serializers import (
 )
 
 class MobilePspCustomerInfoView(GenericAPIView, ListModelMixin, CreateModelMixin):
-    queryset = MobilePspCustomerInfo.objects.all()
+    queryset = BasePspCustomerInfo.objects.all()
     serializer_class = MobilePspCustomerInfoSerializer
 
     def get(self, request, *args, **kwargs):
@@ -30,7 +31,7 @@ class MobilePspCustomerInfoView(GenericAPIView, ListModelMixin, CreateModelMixin
         return self.create(request, *args, **kwargs)
     
 class MobilePspCustomerInfoDetailView(GenericAPIView, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin):
-    queryset = MobilePspCustomerInfo.objects.all()
+    queryset = BasePspCustomerInfo.objects.all()
     serializer_class = MobilePspCustomerInfoSerializer
 
     def get(self, request, *args, **kwargs):

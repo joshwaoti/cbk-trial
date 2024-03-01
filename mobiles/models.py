@@ -8,10 +8,11 @@ class BasePspCustomerInfo(models.Model):
     reporting_date = models.DateField()
 
     class Meta:
-        abstract = True
+        
         unique_together = (('institution_code', 'reporting_date'),)
 
-class MobilePspCustomerInfo(BasePspCustomerInfo):
+class MobilePspCustomerInfo(models.Model):
+    base_info = models.ForeignKey(BasePspCustomerInfo, related_name="PspCustomerInfo", on_delete=models.CASCADE)
     row_id = models.IntegerField()
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
@@ -28,7 +29,8 @@ class MobilePspCustomerInfo(BasePspCustomerInfo):
     value_of_transactions = models.DecimalField(max_digits=10, decimal_places=2)
 
 
-class MobilePsPCustomerTransactionCategorization(BasePspCustomerInfo):
+class MobilePsPCustomerTransactionCategorization(models.Model):
+    base_info = models.ForeignKey(BasePspCustomerInfo, on_delete=models.CASCADE)
     row_id = models.IntegerField()
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
@@ -38,7 +40,8 @@ class MobilePsPCustomerTransactionCategorization(BasePspCustomerInfo):
     value_of_transactions = models.DecimalField(max_digits=10, decimal_places=2)
 
 
-class MobilePsPInteroperability(BasePspCustomerInfo):
+class MobilePsPInteroperability(models.Model):
+    base_info = models.ForeignKey(BasePspCustomerInfo, on_delete=models.CASCADE)
     row_id = models.IntegerField()
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
@@ -48,7 +51,7 @@ class MobilePsPInteroperability(BasePspCustomerInfo):
     outgoing_transaction_volume = models.PositiveIntegerField()
     outgoing_transaction_value = models.DecimalField(max_digits=10, decimal_places=2)
 
-class MobilePsPFailedTransactions(BasePspCustomerInfo):
+class MobilePsPFailedTransactions(models.Model):
     row_id = models.IntegerField()
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
@@ -59,7 +62,8 @@ class MobilePsPFailedTransactions(BasePspCustomerInfo):
     percentage_of_failed_transactions = models.PositiveIntegerField()
 
 
-class MobilePspMerchantTransactions(BasePspCustomerInfo):
+class MobilePspMerchantTransactions(models.Model):
+    base_info = models.ForeignKey(BasePspCustomerInfo, on_delete=models.CASCADE)
     row_id = models.IntegerField()
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
@@ -76,7 +80,8 @@ class MobilePspMerchantTransactions(BasePspCustomerInfo):
     number_of_withdrawal_transactions = models.PositiveIntegerField()
     value_of_withdrawal_transactions = models.DecimalField(max_digits=10, decimal_places=2)
 
-class MobilePspMerchantCustomerBalance(BasePspCustomerInfo):
+class MobilePspMerchantCustomerBalance(models.Model):
+    base_info = models.ForeignKey(BasePspCustomerInfo, on_delete=models.CASCADE)
     row_id = models.IntegerField()
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
