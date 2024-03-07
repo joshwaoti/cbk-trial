@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from mobiles.models import BasePspCustomerInfo
+from mobiles.models import BasePspCustomerInfo, MobilePspCustomerInfo
 import requests
 import csv
 from io import StringIO
@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         url = 'https://eoc0vud0ipdzj1h.m.pipedream.net'
-        data_list = BasePspCustomerInfo.objects.all().values()
+        data_list = MobilePspCustomerInfo.objects.all().values()
 
         # Create a CSV string from the data
         csv_data = StringIO()

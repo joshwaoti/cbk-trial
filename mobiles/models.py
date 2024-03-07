@@ -17,7 +17,7 @@ class MobilePspCustomerInfo(models.Model):
     psp_id = models.CharField(max_length=10)
     reporting_date = models.DateField()
     sub_country_code = models.CharField(max_length=4)
-    gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
+    gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female'), ('C', 'Cooperate'), ('O', 'Others')])
     age_code = models.CharField(max_length=10)
     wallet_code = models.CharField(max_length=3)
     no_of_customers_registered = models.PositiveIntegerField()
